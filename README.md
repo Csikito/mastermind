@@ -9,7 +9,7 @@ You can try 10 times.
 <h3 align='center'>MasterMind</h3>
 
 <div align='center'>
-   
+   <img src='./game.gif'/>
 </div>
 
-Play it here: <a href='#'>🎮</a>
+Play it here: <a href='https://csikito.github.io/mastermind/'>🎮</a>

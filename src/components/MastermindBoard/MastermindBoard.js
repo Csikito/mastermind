@@ -35,7 +35,7 @@ const MastermindBoard = () => {
   ];
 
   const [isActiveColor, setIsActiveColor] = useState(null);
-  const [secret, setSecret] = useState([initialSecret]);
+  const [secret, setSecret] = useState(initialSecret);
   const [guessList, setGuessList] = useState(initialList);
 
   /***************************************** */
@@ -56,7 +56,7 @@ const MastermindBoard = () => {
           }
         : row
     );
-
+    console.log(secret);
     return setGuessList(newGuessList);
   };
 
