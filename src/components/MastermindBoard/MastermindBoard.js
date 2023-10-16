@@ -56,7 +56,6 @@ const MastermindBoard = () => {
           }
         : row
     );
-    console.log(secret);
     return setGuessList(newGuessList);
   };
 
@@ -130,6 +129,7 @@ const MastermindBoard = () => {
 
   const getGameOverMessage = () => {
     const rowIndex = getActiveRowIndex();
+
     if (guessList[rowIndex].blackCount < 4 && rowIndex === MAX_ROWS) {
       return (
         <div className="lost">
@@ -162,8 +162,7 @@ const MastermindBoard = () => {
 
       <div className="board">
         {rows}
-        {getWinningMessage()}
-        {getGameOverMessage()}
+        {getWinningMessage() || getGameOverMessage()}
       </div>
     </>
   );
