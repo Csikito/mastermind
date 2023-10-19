@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import InfoBar from "../InfoBar/InfoBar";
 import PickColorBall from "../PickColorBall/PickColorBall";
 import Row from "../Row/Row";
+import Solution from "../Solution/Solution";
 import "./MastermindBoard.css";
 
 const COLOR = [
@@ -36,9 +38,10 @@ const MastermindBoard = () => {
 
   const [isActiveColor, setIsActiveColor] = useState(null);
   const [secret, setSecret] = useState(initialSecret);
+  const [solution, setSolution] = useState(false);
   const [guessList, setGuessList] = useState(initialList);
 
-  /***************************************** */
+  /*********************************************/
   const getActiveRowIndex = () => {
     return guessList.length - 1;
   };
@@ -72,6 +75,14 @@ const MastermindBoard = () => {
       whiteCount: 0,
     });
 
+    if (
+      (guessList[rowIndex].blackCount < 4 && rowIndex + 1 === MAX_ROWS) ||
+      guessList[rowIndex >= 1 ? rowIndex : 0].blackCount === 4
+    ) {
+      setSolution(true);
+      setIsActiveColor(null);
+    }
+
     setGuessList(updatedGuessList);
   };
 
@@ -90,6 +101,7 @@ const MastermindBoard = () => {
     ));
 
   const newGame = () => {
+    setSolution(false);
     setGuessList(initialList);
     setSecret(initialSecret);
   };
@@ -153,17 +165,17 @@ const MastermindBoard = () => {
 
   return (
     <>
+      <InfoBar />
       <PickColorBall
-        newGame={newGame}
         colors={COLOR}
         isActiveColor={isActiveColor}
         setIsActiveColor={setIsActiveColor}
       />
-
       <div className="board">
         {rows}
         {getWinningMessage() || getGameOverMessage()}
       </div>
+      <Solution secret={secret} solution={solution} newGame={newGame} />
     </>
   );
 };
